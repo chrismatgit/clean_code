@@ -1,5 +1,6 @@
 interface Shape {
   area(): number;
+  serialize(): string;
 }
 
 class Rectangle implements Shape {
@@ -9,6 +10,9 @@ class Rectangle implements Shape {
   public area() {
     return this.width * this.height;
   }
+  public serialize() {
+    return JSON.stringify(this);
+  }
 }
 
 class Circle implements Shape {
@@ -16,6 +20,9 @@ class Circle implements Shape {
 
   public area() {
     return this.radius * this.radius * Math.PI;
+  }
+  public serialize() {
+    return JSON.stringify(this);
   }
 }
 
