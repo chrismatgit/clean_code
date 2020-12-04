@@ -1,23 +1,24 @@
-class Rectangle {
-    public width: number;
-    public height: number;
+interface Shape {
+  area(): number;
 }
 
-class Circle {
-    public radius: number;
+class Rectangle implements Shape {
+  public width: number;
+  public height: number;
+
+  public area() {
+    return this.width * this.height;
+  }
 }
 
-function getArea(shapes: (Rectangle | Circle)[]) {
-    return shapes.reduce(
-        (previous, current) => {
-            if (current instanceof Rectangle) {
-                return current.width * current.height;
-            } else if (current instanceof Circle) {
-                return current.radius * current.radius * Math.PI;
-            } else {
-                throw new Error("Unknown shape")
-            }
-        },
-        0
-    )
+class Circle implements Shape {
+  public radius: number;
+
+  public area() {
+    return this.radius * this.radius * Math.PI;
+  }
+}
+
+function getArea(shapes: Shape[]) {
+  return shapes.reduce((previous, current) => previous + current.area(), 0);
 }
